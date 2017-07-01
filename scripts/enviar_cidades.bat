@@ -1,1 +1,1 @@
-curl --data-binary "@../assets/cidades.csv" localhost/api/cidades
+curl --data-binary "@../assets/cidades.csv" localhost/api/cidades/importar

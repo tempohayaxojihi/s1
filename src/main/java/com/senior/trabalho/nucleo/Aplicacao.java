@@ -9,6 +9,7 @@ import com.senior.trabalho.esquema.Cidade;
 import org.glassfish.grizzly.Connection;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -20,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Aplicacao {
-    private static final URI BASE_URI = URI.create("http://localhost:80");
+    public static final URI BASE_URI = URI.create("http://localhost:80");
     private static HttpServer Servidor;
     public static ConnectionSource Conexao;
 
@@ -62,8 +63,9 @@ public class Aplicacao {
 
     public static void iniciarServidor() {
         final ResourceConfig configuracao =
-                new ResourceConfig()
+            new ResourceConfig()
                 .packages("com.senior.trabalho")
+                //.register(JacksonFeature.class)
                 .register(LoggingFeature.class);
 
         Servidor = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, configuracao);
