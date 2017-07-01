@@ -36,3 +36,6 @@ local.properties
 .gradle/
 build/
 bin/
+
+/doc
+/assets

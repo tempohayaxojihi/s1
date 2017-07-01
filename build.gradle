@@ -3,6 +3,7 @@ version '0.1'
 
 apply plugin: 'java'
 apply plugin: 'war'
+apply plugin: 'idea'
 apply plugin: 'application'
 
 sourceCompatibility = 1.8
@@ -19,7 +20,17 @@ dependencies {
     compile "org.glassfish.jersey.media:jersey-media-json-jackson:2.26-b03"
     compile "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:+"
     compile "org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.26-b03"
+
     compile "com.univocity:univocity-parsers:+"
+
+    compile 'com.j256.ormlite:ormlite-core:+'
+    compile 'com.j256.ormlite:ormlite-jdbc:+'
+
+    compile 'org.xerial:sqlite-jdbc:+'
+
+    //compile 'org.jooq:jooq:+'
+    //compile 'org.jooq-meta:jooq:+'
+    //compile 'org.jooq-codegen:jooq:+'
 }
 
 run{
