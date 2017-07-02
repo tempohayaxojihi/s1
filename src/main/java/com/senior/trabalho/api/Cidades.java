@@ -282,7 +282,7 @@ public class Cidades {
     @GET
     @Path("/estatisticas")
     @Produces(MediaType.APPLICATION_JSON + ";charset=ANSI")
-    public Response obterEstatisticas(@QueryParam("criterio") String criterio /*enum?*/, @QueryParam("valor") String valor) {
+    public Response obterEstatisticas(@DefaultValue("") @QueryParam("criterio") String criterio /*enum?*/, @DefaultValue("") @QueryParam("valor") String valor) {
         Long quantidade = 0l;
 
         try {
