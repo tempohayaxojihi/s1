@@ -311,6 +311,35 @@ public class Cidades {
     public Response obterEstatisticasEstados() {
         List<String[]> dados;
         try {
+            dados = Cidade.getDAO()
+                    .queryBuilder()
+                    .selectRaw("uf", "COUNT(*)")
+                    .groupBy("uf")
+                    .orderBy("uf", true)
+                    .queryRaw().getResults();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return JSONAPIResponse.serverErrorFor(
+                    SQLHelper.getSQLExceptionCauseMessage(e)
+            );
+        }
+
+        if (dados.size() == 0)
+            return JSONAPIResponse.serverErrorFor("Dados não encontrados");
+
+        Map<String, Integer> resultado = new LinkedHashMap<>();
+        for (String[] d: dados)
+            resultado.put(d[0], Integer.parseInt(d[1]));
+
+        return JSONAPIResponse.serverOkFor(resultado);
+    }
+
+    @GET
+    @Path("/estatisticas/extremos/estados")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response obterEstatisticasExtremosEstados() {
+        List<String[]> dados;
+        try {
             dados = Cidade.getDAO().queryRaw(
                 "WITH eqtd (uf, qtd) AS (SELECT uf, COUNT(*) FROM cidades GROUP BY uf) " +
                 "SELECT * FROM eqtd WHERE qtd = (SELECT MIN(qtd) FROM eqtd) " +
